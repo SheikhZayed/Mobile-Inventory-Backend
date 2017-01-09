@@ -27,7 +27,7 @@ public class PurchaseInvoiceController {
     }
 
     @RequestMapping(value = "/invoice",method = RequestMethod.GET)
-    public List<PurchaseInvoiceModel> getPurchaseInvoice(@RequestParam String supplierName){
-        return (List<PurchaseInvoiceModel>) purchaseInvoiceService.getPurchaseInvoice(supplierName);
+    public Object getPurchaseInvoice(@RequestParam String supplierName){
+        return purchaseInvoiceService.getPurchaseInvoice(supplierName);
     }
 }

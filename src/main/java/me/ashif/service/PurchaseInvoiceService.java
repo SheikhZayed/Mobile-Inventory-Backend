@@ -1,6 +1,7 @@
 package me.ashif.service;
 
 import me.ashif.model.PurchaseInvoiceModel;
+import me.ashif.model.SalesInvoiceModel;
 import me.ashif.repository.PurchaseInvoiceRepository;
 import me.ashif.status.Error;
 import me.ashif.status.Success;
@@ -46,6 +47,12 @@ public class PurchaseInvoiceService {
     }
 
     public Object getPurchaseInvoice(String supplierName) {
-        return purchaseInvoiceRepository.findBysupplierName(supplierName);
+        List<PurchaseInvoiceModel> result = new ArrayList<>(purchaseInvoiceRepository.findBysupplierName(supplierName));
+        if (result.isEmpty()){
+            error.setMessage("No result for that name");
+            error.setCode(-3);
+            return error;
+        }
+        return result;
     }
 }

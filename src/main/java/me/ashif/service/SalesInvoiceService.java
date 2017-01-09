@@ -46,6 +46,12 @@ public class SalesInvoiceService {
         }
     }
     public Object getSalesInvoice(String customerName){
-        return salesInvoiceRepository.findBycustomerName(customerName);
+        List<SalesInvoiceModel> result = new ArrayList<>(salesInvoiceRepository.findBycustomerName(customerName));
+        if (result.isEmpty()){
+            error.setMessage("No result for that name");
+            error.setCode(-3);
+            return error;
+        }
+        return result;
     }
 }
