@@ -6,7 +6,7 @@
 	<groupId>me.ashif</groupId>
 	<artifactId>invntry</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 
 	<name>invntry</name>
 	<description>Backend for Inventory App</description>
