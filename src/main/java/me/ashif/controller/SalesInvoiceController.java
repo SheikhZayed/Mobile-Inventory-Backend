@@ -1,5 +1,6 @@
 package me.ashif.controller;
 
+import me.ashif.model.PurchaseInvoiceModel;
 import me.ashif.model.SalesInvoiceModel;
 import me.ashif.service.SalesInvoiceService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,5 +32,9 @@ public class SalesInvoiceController {
     public Object getSalesInvoice(@RequestParam String customerName){
         return salesInvoiceService.getSalesInvoice(customerName);
     }
-
+    @ResponseBody
+    @RequestMapping(value = "/update/{id}",method = RequestMethod.PUT)
+    public Object updatePurchaseInvoice(@PathVariable Long id, @Valid SalesInvoiceModel s, BindingResult bindingResult){
+        return salesInvoiceService.updateSalesInvoice(s,id,bindingResult);
+    }
 }

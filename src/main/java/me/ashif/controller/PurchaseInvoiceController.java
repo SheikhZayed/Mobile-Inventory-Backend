@@ -30,4 +30,10 @@ public class PurchaseInvoiceController {
     public Object getPurchaseInvoice(@RequestParam String supplierName){
         return purchaseInvoiceService.getPurchaseInvoice(supplierName);
     }
+
+    @ResponseBody
+    @RequestMapping(value = "/update/{id}",method = RequestMethod.PUT)
+    public Object updatePurchaseInvoice(@PathVariable Long id,@Valid PurchaseInvoiceModel p,BindingResult bindingResult){
+        return purchaseInvoiceService.updatePurchaseInvoice(p,id,bindingResult);
+    }
 }

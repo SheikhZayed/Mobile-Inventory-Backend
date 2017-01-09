@@ -1,5 +1,6 @@
 package me.ashif.service;
 
+import me.ashif.model.PurchaseInvoiceModel;
 import me.ashif.model.SalesInvoiceModel;
 import me.ashif.repository.SalesInvoiceRepository;
 import me.ashif.status.Error;
@@ -53,5 +54,28 @@ public class SalesInvoiceService {
             return error;
         }
         return result;
+    }
+
+    public Object updateSalesInvoice(SalesInvoiceModel s, Long id, BindingResult bindingResult){
+        if (bindingResult.hasErrors()) {
+            List<FieldError> errors = bindingResult.getFieldErrors();
+            List<String> message = new ArrayList<>();
+            error.setCode(-2);
+            for (FieldError e : errors){
+                message.add("@" + e.getField().toUpperCase() + ":" + e.getDefaultMessage());
+            }
+            error.setMessage("Update Failed");
+            error.setCause(message.toString());
+            return error;
+        }
+        else
+        {
+            SalesInvoiceModel model = salesInvoiceRepository.findOne(id);
+            model = s;
+            salesInvoiceRepository.save(s);
+            success.setMessage("Updated Successfully");
+            success.setCode(2);
+            return success;
+        }
     }
 }

@@ -55,4 +55,26 @@ public class PurchaseInvoiceService {
         }
         return result;
     }
+    public Object updatePurchaseInvoice(PurchaseInvoiceModel p,Long id,BindingResult bindingResult){
+        if (bindingResult.hasErrors()) {
+            List<FieldError> errors = bindingResult.getFieldErrors();
+            List<String> message = new ArrayList<>();
+            error.setCode(-2);
+            for (FieldError e : errors){
+                message.add("@" + e.getField().toUpperCase() + ":" + e.getDefaultMessage());
+            }
+            error.setMessage("Update Failed");
+            error.setCause(message.toString());
+            return error;
+        }
+        else
+        {
+            PurchaseInvoiceModel model = purchaseInvoiceRepository.findOne(id);
+            model = p;
+            purchaseInvoiceRepository.save(p);
+            success.setMessage("Updated Successfully");
+            success.setCode(2);
+            return success;
+        }
+    }
 }
