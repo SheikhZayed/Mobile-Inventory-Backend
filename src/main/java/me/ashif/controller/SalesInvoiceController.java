@@ -32,9 +32,16 @@ public class SalesInvoiceController {
     public Object getSalesInvoice(@RequestParam String customerName){
         return salesInvoiceService.getSalesInvoice(customerName);
     }
+
     @ResponseBody
     @RequestMapping(value = "/update/{id}",method = RequestMethod.PUT)
-    public Object updatePurchaseInvoice(@PathVariable Long id, @Valid SalesInvoiceModel s, BindingResult bindingResult){
+    public Object updateSalesInvoice(@PathVariable Long id, @Valid SalesInvoiceModel s, BindingResult bindingResult){
         return salesInvoiceService.updateSalesInvoice(s,id,bindingResult);
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/delete/{id}",method = RequestMethod.DELETE)
+    public Object deleteSalesInvoice(@PathVariable Long id){
+        return salesInvoiceService.deleteSalesInvoice(id);
     }
 }

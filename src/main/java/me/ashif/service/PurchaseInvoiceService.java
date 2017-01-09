@@ -77,4 +77,12 @@ public class PurchaseInvoiceService {
             return success;
         }
     }
+
+    public Object deletePurchaseInvoice(Long id){
+            PurchaseInvoiceModel model = purchaseInvoiceRepository.findOne(id);
+            purchaseInvoiceRepository.delete(model);
+            success.setMessage("Deleted Successfully");
+            success.setCode(2);
+            return success;
+    }
 }

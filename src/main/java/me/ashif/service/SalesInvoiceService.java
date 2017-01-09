@@ -78,4 +78,12 @@ public class SalesInvoiceService {
             return success;
         }
     }
+
+    public Object deleteSalesInvoice(Long id){
+            SalesInvoiceModel model = salesInvoiceRepository.findOne(id);
+            salesInvoiceRepository.delete(model);
+            success.setMessage("Deleted Successfully");
+            success.setCode(2);
+            return success;
+    }
 }

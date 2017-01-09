@@ -36,4 +36,10 @@ public class PurchaseInvoiceController {
     public Object updatePurchaseInvoice(@PathVariable Long id,@Valid PurchaseInvoiceModel p,BindingResult bindingResult){
         return purchaseInvoiceService.updatePurchaseInvoice(p,id,bindingResult);
     }
+
+    @ResponseBody
+    @RequestMapping(value = "/delete/{id}",method = RequestMethod.DELETE)
+    public Object deletePurchaseInvoice(@PathVariable Long id){
+        return purchaseInvoiceService.deletePurchaseInvoice(id);
+    }
 }
