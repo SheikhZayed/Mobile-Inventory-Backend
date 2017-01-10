@@ -1,6 +1,5 @@
 package me.ashif.controller;
 
-import me.ashif.model.PurchaseInvoiceModel;
 import me.ashif.model.SalesInvoiceModel;
 import me.ashif.service.SalesInvoiceService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +7,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.List;
 
 /**
  * Created by Ashif Ismail on 9/1/17.

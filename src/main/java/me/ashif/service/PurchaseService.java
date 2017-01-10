@@ -1,7 +1,9 @@
 package me.ashif.service;
 
+import me.ashif.model.ItemsModel;
 import me.ashif.model.PurchaseInvoiceModel;
 import me.ashif.model.PurchaseModel;
+import me.ashif.model.SupplierModel;
 import me.ashif.repository.PurchaseRepository;
 import me.ashif.status.Error;
 import me.ashif.status.Success;
@@ -23,6 +25,8 @@ public class PurchaseService {
 
     Error error = new Error();
     Success success = new Success();
+    SupplierModel supplier = new SupplierModel();
+    ItemsModel items = new ItemsModel();
 
     @Autowired
     private PurchaseRepository purchaseRepository;
@@ -46,4 +50,24 @@ public class PurchaseService {
             return success;
         }
     }
+    public Object getAllSuppliers(){
+        ArrayList<PurchaseModel> resultList = (ArrayList<PurchaseModel>) purchaseRepository.findAll();
+        ArrayList<String> supplierList = new ArrayList<>();
+        for (PurchaseModel p : resultList){
+            supplierList.add(p.getSupplierName());
+        }
+        supplier.setSuppliername(supplierList);
+        return supplier;
+    }
+
+    public Object getItemsBySupplierName(String supplierName){
+        List<PurchaseModel> resultList = purchaseRepository.findBysupplierName(supplierName);
+        ArrayList<String> itemsList = new ArrayList<>();
+        for (PurchaseModel p : resultList){
+            itemsList.add(p.getItemName());
+        }
+        items.setItems(itemsList);
+        return items;
+    }
+
 }

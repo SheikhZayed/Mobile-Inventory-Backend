@@ -1,7 +1,8 @@
 package me.ashif.service;
 
+import me.ashif.model.ItemsModel;
 import me.ashif.model.PurchaseInvoiceModel;
-import me.ashif.model.SalesInvoiceModel;
+import me.ashif.model.SupplierModel;
 import me.ashif.repository.PurchaseInvoiceRepository;
 import me.ashif.status.Error;
 import me.ashif.status.Success;
@@ -22,6 +23,7 @@ public class PurchaseInvoiceService {
 
     Error error = new Error();
     Success success = new Success();
+
 
     @Autowired
     private PurchaseInvoiceRepository purchaseInvoiceRepository;
@@ -85,4 +87,6 @@ public class PurchaseInvoiceService {
             success.setCode(2);
             return success;
     }
+
+
 }

@@ -27,7 +27,6 @@ public class PurchaseModel {
     private String supplierName;
     private float commission;
 
-
     public long getId() {
         return id;
     }
