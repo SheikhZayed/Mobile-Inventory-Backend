@@ -1,7 +1,6 @@
 package me.ashif.service;
 
 import me.ashif.model.ItemsModel;
-import me.ashif.model.PurchaseInvoiceModel;
 import me.ashif.model.PurchaseModel;
 import me.ashif.model.SupplierModel;
 import me.ashif.repository.PurchaseRepository;
@@ -12,7 +11,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 
-import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -68,6 +66,56 @@ public class PurchaseService {
         }
         items.setItems(itemsList);
         return items;
+    }
+    public Object getDetails(String supplierName,String itemName){
+        List<PurchaseModel> resultList = purchaseRepository.findBysupplierName(supplierName);
+        ArrayList<PurchaseModel> detailsList = new ArrayList<>();
+        for (PurchaseModel p : resultList){
+            if (p.getItemName().equalsIgnoreCase(itemName)){
+                detailsList.add(p);
+            }
+        }
+        return detailsList;
+    }
+
+    public Object getPurchase(String supplierName) {
+        List<PurchaseModel> result = purchaseRepository.findBysupplierName(supplierName);
+        if (result.isEmpty()){
+            error.setMessage("No result for that name");
+            error.setCode(-3);
+            return error;
+        }
+        return result;
+    }
+    public Object updatePurchase(PurchaseModel p,Integer id,BindingResult bindingResult){
+        if (bindingResult.hasErrors()) {
+            List<FieldError> errors = bindingResult.getFieldErrors();
+            List<String> message = new ArrayList<>();
+            error.setCode(-2);
+            for (FieldError e : errors){
+                message.add("@" + e.getField().toUpperCase() + ":" + e.getDefaultMessage());
+            }
+            error.setMessage("Update Failed");
+            error.setCause(message.toString());
+            return error;
+        }
+        else
+        {
+            PurchaseModel model = purchaseRepository.findOne(id);
+            model = p;
+            purchaseRepository.save(p);
+            success.setMessage("Updated Successfully");
+            success.setCode(2);
+            return success;
+        }
+    }
+
+    public Object deletePurchase(Integer id){
+        PurchaseModel model = purchaseRepository.findOne(id);
+        purchaseRepository.delete(model);
+        success.setMessage("Deleted Successfully");
+        success.setCode(2);
+        return success;
     }
 
 }

@@ -28,9 +28,34 @@ public class PurchaseController {
     public Object getAllSuppliers(){
         return purchaseService.getAllSuppliers();
     }
+
     @RequestMapping("/items")
     public Object getItemsforSupplier(@RequestParam String supplierName){
         return purchaseService.getItemsBySupplierName(supplierName);
     }
 
+    @RequestMapping("details")
+    public Object getDetails(@RequestParam String supplierName,@RequestParam String itemName){
+        return purchaseService.getDetails(supplierName, itemName);
+    }
+
+    /**
+    return's all purchase's from a given supplier
+     */
+    @RequestMapping(value = "/invoice",method = RequestMethod.GET)
+    public Object getAllPurchases(@RequestParam String supplierName){
+        return purchaseService.getPurchase(supplierName);
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/update/{id}",method = RequestMethod.PUT)
+    public Object updatePurchase(@PathVariable Integer id, @Valid PurchaseModel p, BindingResult bindingResult){
+        return purchaseService.updatePurchase(p,id,bindingResult);
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/delete/{id}",method = RequestMethod.DELETE)
+    public Object deletePurchase(@PathVariable Integer id){
+        return purchaseService.deletePurchase(id);
+    }
 }

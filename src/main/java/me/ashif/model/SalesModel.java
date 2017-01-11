@@ -6,7 +6,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.validation.constraints.Min;
 
 /**
  * Created by Ashif Ismail on 9/1/17.
@@ -17,7 +16,7 @@ public class SalesModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private Integer id;
     @NotEmpty
     private String itemName;
     private int quantity;
@@ -28,11 +27,11 @@ public class SalesModel {
     private float commission;
 
 
-    public long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
     public String getItemName() {

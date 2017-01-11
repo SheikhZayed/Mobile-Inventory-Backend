@@ -1,5 +1,7 @@
 package me.ashif.service;
 
+import me.ashif.model.CustomerModel;
+import me.ashif.model.ItemsModel;
 import me.ashif.model.PurchaseModel;
 import me.ashif.model.SalesModel;
 import me.ashif.repository.PurchaseRepository;
@@ -23,6 +25,8 @@ public class SalesService {
 
     Error error = new Error();
     Success success = new Success();
+    CustomerModel customer = new CustomerModel();
+    ItemsModel items = new ItemsModel();
 
     @Autowired
     private SalesRepository salesRepository;
@@ -46,4 +50,75 @@ public class SalesService {
             return success;
         }
     }
+
+    public Object getAllCustomers(){
+        ArrayList<SalesModel> resultList = (ArrayList<SalesModel>) salesRepository.findAll();
+        ArrayList<String> customerList = new ArrayList<>();
+        for (SalesModel s : resultList){
+            customerList.add(s.getCustomerName());
+        }
+        customer.setCustomername(customerList);
+        return customer;
+    }
+
+    public Object getItemsByCustomerName(String customerName){
+        List<SalesModel> resultList = salesRepository.findBycustomerName(customerName);
+        ArrayList<String> itemsList = new ArrayList<>();
+        for (SalesModel s : resultList){
+            itemsList.add(s.getItemName());
+        }
+        items.setItems(itemsList);
+        return items;
+    }
+    public Object getDetails(String customerName,String itemName){
+        List<SalesModel> resultList = salesRepository.findBycustomerName(customerName);
+        ArrayList<SalesModel> detailsList = new ArrayList<>();
+        for (SalesModel s : resultList){
+            if (s.getItemName().equalsIgnoreCase(itemName)){
+                detailsList.add(s);
+            }
+        }
+        return detailsList;
+    }
+
+    public Object getAllSales(String customerName) {
+        List<SalesModel> result = salesRepository.findBycustomerName(customerName);
+        if (result.isEmpty()){
+            error.setMessage("No result for that name");
+            error.setCode(-3);
+            return error;
+        }
+        return result;
+    }
+    public Object updateSales(SalesModel p,Integer id,BindingResult bindingResult){
+        if (bindingResult.hasErrors()) {
+            List<FieldError> errors = bindingResult.getFieldErrors();
+            List<String> message = new ArrayList<>();
+            error.setCode(-2);
+            for (FieldError e : errors){
+                message.add("@" + e.getField().toUpperCase() + ":" + e.getDefaultMessage());
+            }
+            error.setMessage("Update Failed");
+            error.setCause(message.toString());
+            return error;
+        }
+        else
+        {
+            SalesModel model = salesRepository.findOne(id);
+            model = p;
+            salesRepository.save(p);
+            success.setMessage("Updated Successfully");
+            success.setCode(2);
+            return success;
+        }
+    }
+
+    public Object deleteSales(Integer id){
+        SalesModel model = salesRepository.findOne(id);
+        salesRepository.delete(model);
+        success.setMessage("Deleted Successfully");
+        success.setCode(2);
+        return success;
+    }
+
 }
