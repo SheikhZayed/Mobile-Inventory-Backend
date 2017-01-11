@@ -6,7 +6,7 @@
 	<groupId>me.ashif</groupId>
 	<artifactId>invntry</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
+	<packaging>war</packaging>
 
 	<name>invntry</name>
 	<description>Backend for Inventory App</description>
@@ -19,6 +19,7 @@
 	</parent>
 
 	<properties>
+
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
@@ -52,13 +53,13 @@
 
 	<build>
 		<plugins>
-
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 
 		</plugins>
+
 	</build>
 
 
