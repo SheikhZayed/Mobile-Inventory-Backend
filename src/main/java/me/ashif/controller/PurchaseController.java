@@ -43,8 +43,8 @@ public class PurchaseController {
     return's all purchase's from a given supplier
      */
     @RequestMapping(value = "/invoice",method = RequestMethod.GET)
-    public Object getAllPurchases(@RequestParam String supplierName){
-        return purchaseService.getPurchase(supplierName);
+    public Object getAllPurchases(@RequestParam String supplierName,@RequestParam String supplierCode){
+        return purchaseService.getPurchase(supplierName,supplierCode);
     }
 
     @ResponseBody
@@ -58,4 +58,18 @@ public class PurchaseController {
     public Object deletePurchase(@PathVariable Integer id){
         return purchaseService.deletePurchase(id);
     }
+
+    @ResponseBody
+    @RequestMapping("/suppliercode")
+    public Object getSupplierCodes(@RequestParam String supplierName){
+        return purchaseService.getSupplierCode(supplierName);
+    }
+
+    @ResponseBody
+    @RequestMapping("/suppliercodes")
+    public Object getAllSupplierCodes(){
+        return purchaseService.getAllSupplierCode();
+    }
+
+
 }

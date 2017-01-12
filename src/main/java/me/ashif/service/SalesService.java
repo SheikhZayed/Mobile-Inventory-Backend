@@ -4,8 +4,8 @@ import me.ashif.model.CustomerModel;
 import me.ashif.model.ItemsModel;
 import me.ashif.model.PurchaseModel;
 import me.ashif.model.SalesModel;
-import me.ashif.repository.PurchaseRepository;
 import me.ashif.repository.SalesRepository;
+import me.ashif.response.EntityCode;
 import me.ashif.status.Error;
 import me.ashif.status.Success;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -119,6 +119,28 @@ public class SalesService {
         success.setMessage("Deleted Successfully");
         success.setCode(2);
         return success;
+    }
+
+    public Object getAllCustomerCodes(){
+        List<SalesModel> result = (List<SalesModel>) salesRepository.findAll();
+        ArrayList<String> customerCodeList = new ArrayList<>();
+        for (SalesModel s : result) {
+            customerCodeList.add(s.getCustomerCode());
+        }
+        EntityCode entityCode = new EntityCode();
+        entityCode.setEntityCode(customerCodeList);
+        return entityCode;
+    }
+
+    public Object getCustomerCode(String customerName){
+        List<SalesModel> result = salesRepository.findBycustomerName(customerName);
+        ArrayList<String> customerCodeList = new ArrayList<>();
+        for (SalesModel s : result) {
+            customerCodeList.add(s.getCustomerCode());
+        }
+        EntityCode entityCode = new EntityCode();
+        entityCode.setEntityCode(customerCodeList);
+        return entityCode;
     }
 
 }

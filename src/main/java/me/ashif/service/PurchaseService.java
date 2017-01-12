@@ -4,6 +4,7 @@ import me.ashif.model.ItemsModel;
 import me.ashif.model.PurchaseModel;
 import me.ashif.model.SupplierModel;
 import me.ashif.repository.PurchaseRepository;
+import me.ashif.response.EntityCode;
 import me.ashif.status.Error;
 import me.ashif.status.Success;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -78,14 +79,23 @@ public class PurchaseService {
         return detailsList;
     }
 
-    public Object getPurchase(String supplierName) {
+    public Object getPurchase(String supplierName,String supplierCode) {
         List<PurchaseModel> result = purchaseRepository.findBysupplierName(supplierName);
+        ArrayList<PurchaseModel> filteredList = new ArrayList<>();
         if (result.isEmpty()){
             error.setMessage("No result for that name");
             error.setCode(-3);
             return error;
         }
-        return result;
+        else
+        {
+            for (PurchaseModel p : result){
+                if (p.getSupplierCode().equalsIgnoreCase(supplierCode)){
+                    filteredList.add(p);
+                }
+            }
+        }
+        return filteredList;
     }
     public Object updatePurchase(PurchaseModel p,Integer id,BindingResult bindingResult){
         if (bindingResult.hasErrors()) {
@@ -117,5 +127,25 @@ public class PurchaseService {
         success.setCode(2);
         return success;
     }
+    public Object getSupplierCode(String supplierName){
+        List<PurchaseModel> result = purchaseRepository.findBysupplierName(supplierName);
+        ArrayList<String> supplierCodeList = new ArrayList<>();
+        for (PurchaseModel p : result) {
+            supplierCodeList.add(p.getSupplierCode());
+        }
+        EntityCode entityCode = new EntityCode();
+        entityCode.setEntityCode(supplierCodeList);
+        return entityCode;
+    }
 
+    public Object getAllSupplierCode(){
+        List<PurchaseModel> result = (List<PurchaseModel>) purchaseRepository.findAll();
+        ArrayList<String> supplierCodeList = new ArrayList<>();
+        for (PurchaseModel p : result) {
+            supplierCodeList.add(p.getSupplierCode());
+        }
+        EntityCode entityCode = new EntityCode();
+        entityCode.setEntityCode(supplierCodeList);
+        return entityCode;
+    }
 }

@@ -61,4 +61,15 @@ public class SalesController {
         return salesService.deleteSales(id);
     }
 
+    @ResponseBody
+    @RequestMapping("/customercodes")
+    public Object getAllSupplierCodes(){
+        return salesService.getAllCustomerCodes();
+    }
+
+    @ResponseBody
+    @RequestMapping("/customercode")
+    public Object getSupplierCodes(@RequestParam String customerName){
+        return salesService.getCustomerCode(customerName);
+    }
 }

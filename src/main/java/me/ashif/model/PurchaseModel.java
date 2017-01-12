@@ -19,6 +19,7 @@ public class PurchaseModel {
     private Integer id;
     @NotEmpty
     private String itemName;
+    private String supplierCode;
     private int quantity;
     private int price;
     private float total;
@@ -28,6 +29,14 @@ public class PurchaseModel {
 
     public Integer getId() {
         return id;
+    }
+
+    public String getSupplierCode() {
+        return supplierCode;
+    }
+
+    public void setSupplierCode(String supplierCode) {
+        this.supplierCode = supplierCode;
     }
 
     public void setId(Integer id) {

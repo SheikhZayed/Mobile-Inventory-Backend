@@ -19,6 +19,7 @@ public class SalesModel {
     private Integer id;
     @NotEmpty
     private String itemName;
+    private String customerCode;
     private int quantity;
     private int price;
     private float total;
@@ -29,6 +30,14 @@ public class SalesModel {
 
     public Integer getId() {
         return id;
+    }
+
+    public String getCustomerCode() {
+        return customerCode;
+    }
+
+    public void setCustomerCode(String customerCode) {
+        this.customerCode = customerCode;
     }
 
     public void setId(Integer id) {
