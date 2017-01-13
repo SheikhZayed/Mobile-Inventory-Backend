@@ -71,5 +71,9 @@ public class PurchaseController {
         return purchaseService.getAllSupplierCode();
     }
 
-
+    @ResponseBody
+    @RequestMapping("")
+    public Object getAllSalesReport(){
+        return purchaseService.getAllPurchaseReport();
+    }
 }

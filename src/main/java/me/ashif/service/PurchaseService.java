@@ -148,4 +148,7 @@ public class PurchaseService {
         entityCode.setEntityCode(supplierCodeList);
         return entityCode;
     }
+    public Object getAllPurchaseReport(){
+        return purchaseRepository.findAll();
+    }
 }

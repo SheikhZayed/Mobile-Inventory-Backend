@@ -143,4 +143,7 @@ public class SalesService {
         return entityCode;
     }
 
+    public Object getAllSalesReport(){
+        return salesRepository.findAll();
+    }
 }

@@ -72,4 +72,10 @@ public class SalesController {
     public Object getSupplierCodes(@RequestParam String customerName){
         return salesService.getCustomerCode(customerName);
     }
+
+    @ResponseBody
+    @RequestMapping("")
+    public Object getAllSalesReport(){
+        return salesService.getAllSalesReport();
+    }
 }
