@@ -6,7 +6,7 @@
 	<groupId>me.ashif</groupId>
 	<artifactId>invntry</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 
 	<name>invntry</name>
 	<description>Backend for Inventory App</description>
@@ -61,21 +61,6 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-			<plugin>
-				<groupId>com.heroku.sdk</groupId>
-				<artifactId>heroku-maven-plugin</artifactId>
-				<version>1.1.3</version>
-			</plugin>
-				<plugin>
-					<groupId>com.google.cloud.tools</groupId>
-					<artifactId>appengine-maven-plugin</artifactId>
-					<version>1.0.0</version>
-				</plugin>
-			<plugin>
-				<groupId>com.google.appengine</groupId>
-				<artifactId>gcloud-maven-plugin</artifactId>
-				<version>2.0.9.106.v20160420</version>
 			</plugin>
 		</plugins>
 
